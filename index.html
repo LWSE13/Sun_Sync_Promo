@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SunSync | Adaptive Circadian Lighting</title>
+  <meta
+    name="description"
+    content="SunSync is an adaptive circadian lighting project that combines smart lamp design, firmware planning, testing, and project documentation in one responsive website."
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-glow glow-left"></div>
+  <div class="page-glow glow-right"></div>
+
+  <header class="site-header" id="site-header">
+    <div class="frame header-row">
+      <a class="site-brand" href="#top" aria-label="SunSync home">
+        <img src="assets/media/logo.png" alt="SunSync logo">
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#overview">Overview</a>
+        <a href="#schematics">Schematics</a>
+        <a href="#risks">Risks</a>
+        <a href="#tests">Tests</a>
+        <a href="#documents">Documents</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="overview">
+      <div class="frame">
+        <article class="hero-shell">
+          <img class="hero-logo" src="assets/media/logo.png" alt="SunSync logo artwork">
+          <p class="eyebrow">Circadian Smart Lighting Platform</p>
+          <h1>SunSync brings a controllable sunrise and sunset indoors, even when the real sun is not available.</h1>
+          <p class="hero-lede">
+            SunSync is a smart lighting concept built around an ESP32 controller, ambient light sensing,
+            motion detection, timed light transitions, and a local web interface. The purpose is simple:
+            give the user stronger sleep and wake cues in blackout rooms, irregular routines, or any environment
+            where natural sunlight is not enough.
+          </p>
+          <p class="hero-lede">
+            Instead of acting like a normal bedside lamp, it uses warm red lighting to support winding down and
+            cooler white lighting to support waking up. The system also keeps manual override available whenever
+            the user needs immediate light.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#documents">Open Project Documents</a>
+            <a class="button button-secondary" href="assets/docs/SunSync_Preliminary_Schematics.md" download>Download Schematics</a>
+          </div>
+
+          <div class="video-block">
+            <div class="block-topline">
+              <span class="eyebrow">Project Demo</span>
+              <a class="text-link" href="assets/media/SunSync_3Min_Vid.mov" download>Download video</a>
+            </div>
+            <video controls preload="metadata" playsinline>
+              <source src="assets/media/SunSync_3Min_Vid.mov" type="video/quicktime">
+              Your browser does not support embedded QuickTime video. Use the download link instead.
+            </video>
+            <p class="support-note">
+              The demo is a large <code>.mov</code> file, so it stays on manual playback to avoid loading the full file immediately.
+            </p>
+          </div>
+
+          <p class="hero-footnote">5 integrated source documents | 7 tracked project risks | 15 functional test cases</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="schematics">
+      <div class="frame">
+        <article class="section-card">
+          <div class="section-topline">
+            <p class="eyebrow">Technical Design</p>
+            <a class="text-link" href="assets/docs/SunSync_Preliminary_Schematics.md" download>Download original Markdown</a>
+          </div>
+          <h2>The hardware, firmware, and lighting behavior are designed to work as one complete system.</h2>
+          <p>
+            The build centers on an ESP32 with an RGB LED strip, a PIR motion sensor, a potentiometer,
+            toggle switches, three photoresistors, and supporting passive components mounted on perfboard inside
+            a 3D printed shell. The LED strip should use a separate power rail from the ESP32 so the controller
+            remains stable under lighting load.
+          </p>
+          <p>
+            The firmware is intended for C++ on the Arduino ESP32 toolchain. WiFiManager handles first-time setup,
+            NTP provides time sync, and the embedded web server serves both the local interface and API endpoints such as
+            <code>/api/sunsync</code>, <code>/api/color</code>, and <code>/api/config</code>. During sleep periods,
+            the lamp favors dim red light, and during wake-up it shifts toward brighter cool white light.
+          </p>
+          <ul class="section-list">
+            <li>Three photoresistors help maintain usable ambient readings even if one sensor is blocked.</li>
+            <li>The PIR sensor uses SPI, while the photoresistors connect through analogue inputs.</li>
+            <li>Heat-set inserts make the prototype shell easier to disassemble, revise, and reassemble.</li>
+            <li>The biological goal is to support melatonin release at night and alertness in the morning.</li>
+          </ul>
+
+          <div class="embed-block">
+            <div class="block-topline">
+              <h3>Design diagram</h3>
+              <a class="text-link" href="assets/docs/design_diagram.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+            </div>
+            <iframe src="assets/docs/design_diagram.pdf#view=FitH" title="SunSync design diagram PDF"></iframe>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="risks">
+      <div class="frame">
+        <article class="section-card">
+          <div class="section-topline">
+            <p class="eyebrow">Risk Assessment</p>
+            <a class="text-link" href="assets/docs/SunSync_Risk_Assessment.docx" download>Download Word document</a>
+          </div>
+          <h2>The project risks are clear, prioritized, and already tied to practical mitigation decisions.</h2>
+          <p>
+            The highest-risk issue identified so far is power instability from LED current draw, which is why the design
+            separates the LED rail from the ESP32 supply and adds smoothing components. Thermal management is also important,
+            so venting, heatsinking, and brightness limits are part of the mitigation approach for LED heat build-up.
+          </p>
+          <p>
+            Sensor reliability and project scope remain the main open concerns. PIR false readings can affect sleep detection,
+            and native mobile apps can expand the workload too quickly if they are treated as part of the MVP too early.
+            The current approach keeps the first milestone focused on the lamp and its local web UI.
+          </p>
+          <ul class="section-list">
+            <li><strong>Closed:</strong> power instability, WiFi setup friction, and component availability.</li>
+            <li><strong>Mitigated:</strong> LED heating and storage pressure on the ESP32.</li>
+            <li><strong>Open:</strong> motion sensing reliability and scope creep from optional mobile apps.</li>
+          </ul>
+
+          <div class="embed-block">
+            <div class="block-topline">
+              <h3>Project timeline and Gantt plan</h3>
+              <a class="text-link" href="assets/docs/timetable-gantt-chart.pdf" target="_blank" rel="noopener noreferrer">Open PDF</a>
+            </div>
+            <iframe src="assets/docs/timetable-gantt-chart.pdf#view=FitH" title="SunSync timetable Gantt chart PDF"></iframe>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="tests">
+      <div class="frame">
+        <article class="section-card">
+          <div class="section-topline">
+            <p class="eyebrow">Verification</p>
+            <a class="text-link" href="assets/docs/Test_Cases.xlsx" download>Download Excel workbook</a>
+          </div>
+          <h2>The test plan follows the full journey from first boot through API control, timed behavior, and saved settings.</h2>
+          <p>
+            The current workbook defines fifteen functional test cases. It begins with startup, access point creation,
+            WiFi reconnection, captive-portal fallback, mDNS discovery, and NTP sync. From there, it verifies the local API
+            by checking device identity, current color state, color updates, and configuration updates for both sleep and wake cycles.
+          </p>
+          <p>
+            The later tests focus on the behavior that matters most to the user: whether the lamp changes color at the correct
+            time during sleep, whether wake-up light ramps correctly, whether it stays stable outside scheduled windows, and whether
+            the saved UUID and configuration persist across reboots.
+          </p>
+          <ol class="section-list numbered-list">
+            <li><strong>TC001-TC005:</strong> startup, networking, discovery, and time synchronization.</li>
+            <li><strong>TC006-TC011:</strong> API identity, color handling, and configuration updates.</li>
+            <li><strong>TC012-TC014:</strong> time-based sleep and wake transitions, plus out-of-cycle stability.</li>
+            <li><strong>TC015:</strong> persistence of configuration and device identity after reboot.</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="documents">
+      <div class="frame">
+        <article class="section-card">
+          <div class="section-topline">
+            <p class="eyebrow">Document Hub</p>
+          </div>
+          <h2>All supplied files remain part of the site, but they now sit in one straightforward project library.</h2>
+          <p>
+            The two PDF files are embedded where they are most useful in the page itself, while the Word, Markdown,
+            and Excel files remain available as source downloads. That keeps the website simple while still preserving
+            all of the original project material.
+          </p>
+
+          <div class="document-list">
+            <a class="document-row" href="assets/docs/design_diagram.pdf" target="_blank" rel="noopener noreferrer">
+              <span class="document-type">PDF</span>
+              <span><strong>Design Diagram</strong> - system design reference used in the technical section.</span>
+            </a>
+            <a class="document-row" href="assets/docs/timetable-gantt-chart.pdf" target="_blank" rel="noopener noreferrer">
+              <span class="document-type">PDF</span>
+              <span><strong>Timetable Gantt Chart</strong> - project planning document embedded in the risks section.</span>
+            </a>
+            <a class="document-row" href="assets/docs/SunSync_Risk_Assessment.docx" download>
+              <span class="document-type">DOCX</span>
+              <span><strong>Risk Assessment</strong> - editable Word source for the risk log.</span>
+            </a>
+            <a class="document-row" href="assets/docs/SunSync_Preliminary_Schematics.md" download>
+              <span class="document-type">MD</span>
+              <span><strong>Preliminary Schematics</strong> - original Markdown source for the technical notes.</span>
+            </a>
+            <a class="document-row" href="assets/docs/Test_Cases.xlsx" download>
+              <span class="document-type">XLSX</span>
+              <span><strong>Test Cases</strong> - the full workbook covering device, API, and timing validation.</span>
+            </a>
+          </div>
+
+          <p class="support-note">
+            Browsers handle <code>.docx</code> and <code>.xlsx</code> rendering inconsistently, so those files stay as downloads while their content is summarized on the page.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var header = document.getElementById("site-header");
+      var lastY = window.scrollY;
+
+      function syncHeader() {
+        var currentY = window.scrollY;
+        var atTop = currentY <= 16;
+        var scrollingDown = currentY > lastY + 4;
+        var scrollingUp = currentY < lastY - 4;
+
+        if (atTop || scrollingUp) {
+          header.classList.remove("is-tucked");
+        } else if (scrollingDown && currentY > 96) {
+          header.classList.add("is-tucked");
+        }
+
+        lastY = currentY;
+      }
+
+      window.addEventListener("scroll", syncHeader, { passive: true });
+      syncHeader();
+    }());
+  </script>
+</body>
+</html>
