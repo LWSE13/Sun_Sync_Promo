@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 
@@ -383,41 +383,6 @@
     </div>
   </footer>
 
-  <script>
-    // Header auto-hide on scroll
-    (function () {
-      var header = document.getElementById("site-header");
-      var lastY = window.scrollY;
-      function syncHeader() {
-        var y = window.scrollY;
-        var atTop = y <= 16;
-        var down = y > lastY + 4;
-        var up = y < lastY - 4;
-        if (atTop || up) header.classList.remove("is-tucked");
-        else if (down && y > 96) header.classList.add("is-tucked");
-        lastY = y;
-      }
-      window.addEventListener("scroll", syncHeader, { passive: true });
-      syncHeader();
-    }());
-
-    // Scroll reveal via IntersectionObserver
-    (function () {
-      var els = document.querySelectorAll(".reveal");
-      if (!("IntersectionObserver" in window)) {
-        els.forEach(function (el) { el.classList.add("revealed"); });
-        return;
-      }
-      var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-            obs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      els.forEach(function (el) { obs.observe(el); });
-    }());
-  </script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
