@@ -1079,3 +1079,466 @@ h4 {
     gap: 0.5rem 1.5rem;
   }
 }
+
+
+/* ============================================================
+   HOW IT WORKS — STEPS GRID
+   ============================================================ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.step-card {
+  position: relative;
+  padding: 2rem 1.6rem 1.75rem;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.step-card:hover {
+  border-color: var(--border-md);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card);
+}
+
+.step-number {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+
+.step-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.3rem;
+}
+
+.step-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Step icon colour variants — follow the feature-icon pattern */
+.step-icon-sleep      { background: rgba(130, 80, 255, 0.1);  border: 1px solid rgba(130, 80, 255, 0.22); color: #a88aff; }
+.step-icon-sense      { background: rgba(70, 200, 255, 0.1);  border: 1px solid rgba(70, 200, 255, 0.2);  color: var(--sync); }
+.step-icon-transition { background: rgba(255, 154, 45, 0.1);  border: 1px solid rgba(255, 154, 45, 0.2);  color: var(--sun); }
+.step-icon-wake       { background: rgba(255, 220, 80, 0.1);  border: 1px solid rgba(255, 220, 80, 0.22); color: #ffd84a; }
+
+.step-card h3 { margin-bottom: 0.5rem; }
+
+.step-card p {
+  font-size: 0.94rem;
+  color: var(--text-muted);
+  line-height: 1.68;
+}
+
+/* Stagger the four step cards */
+.steps-grid .reveal:nth-child(2) { transition-delay: 0.1s; }
+.steps-grid .reveal:nth-child(3) { transition-delay: 0.2s; }
+.steps-grid .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+
+/* ============================================================
+   GALLERY GRID
+   ============================================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.gallery-item {
+  overflow: hidden;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  aspect-ratio: 4 / 3;
+  transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+}
+
+.gallery-item:hover {
+  border-color: var(--border-md);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+/* Stagger gallery items */
+.gallery-grid .reveal:nth-child(2) { transition-delay: 0.07s; }
+.gallery-grid .reveal:nth-child(3) { transition-delay: 0.14s; }
+.gallery-grid .reveal:nth-child(4) { transition-delay: 0.21s; }
+.gallery-grid .reveal:nth-child(5) { transition-delay: 0.28s; }
+.gallery-grid .reveal:nth-child(6) { transition-delay: 0.35s; }
+
+
+/* ============================================================
+   CTA BANNER SECTION
+   ============================================================ */
+.cta-banner-section {
+  padding: var(--section-gap) 0;
+}
+
+.cta-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: clamp(2rem, 4vw, 3.25rem) clamp(1.75rem, 4vw, 3rem);
+  border-radius: var(--r-xl);
+  border: 1px solid rgba(255, 154, 45, 0.18);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 154, 45, 0.06) 0%,
+    rgba(70, 200, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
+}
+
+.cta-banner-text {
+  max-width: 560px;
+}
+
+.cta-banner-text h2 {
+  margin-top: 0.25rem;
+}
+
+.cta-banner-text .section-desc {
+  margin-top: 0.6rem;
+}
+
+
+/* ============================================================
+   DOCS PAGE HERO (compact section header for docs.html)
+   ============================================================ */
+.docs-hero {
+  padding-top: clamp(3rem, 8vh, 5rem);
+  padding-bottom: clamp(0.5rem, 2vh, 1.5rem);
+}
+
+
+/* ============================================================
+   RESPONSIVE — 900 px (new section additions)
+   ============================================================ */
+@media (max-width: 900px) {
+  .steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — 760 px (new section additions)
+   ============================================================ */
+@media (max-width: 760px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+/* ============================================================
+   MEET THE TEAM — DIAMOND GRID
+   ============================================================ */
+
+/*
+  3 × 3 CSS Grid:
+  [TL card]  [ empty ]  [TR card]
+  [ empty ]  [diamond]  [ empty ]
+  [BL card]  [ empty ]  [BR card]
+
+  Center column/row = clamp(220–300px) so the rotated
+  diamond (side = center / √2) fits exactly in the cell.
+*/
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr clamp(220px, 26vw, 300px) 1fr;
+  grid-template-rows: auto clamp(220px, 26vw, 300px) auto;
+  gap: 1.25rem;
+}
+
+/* Explicit grid placement for each member */
+.team-card--tl   { grid-column: 1; grid-row: 1; }
+.team-card--tr   { grid-column: 3; grid-row: 1; }
+.team-center-wrap { grid-column: 2; grid-row: 2; display: flex; align-items: center; justify-content: center; }
+.team-card--bl   { grid-column: 1; grid-row: 3; }
+.team-card--br   { grid-column: 3; grid-row: 3; }
+
+/* ── Base card ───────────────────────────────────────────── */
+.team-card {
+  padding: 2rem 1.8rem;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: border-color 250ms ease, transform 250ms ease, box-shadow 250ms ease;
+}
+
+/* Lift on hover for the four corner cards */
+.team-card--tl:hover,
+.team-card--tr:hover,
+.team-card--bl:hover,
+.team-card--br:hover {
+  transform: translateY(-5px);
+}
+
+/* ── Per-member outline glow on hover ────────────────────── */
+.team-card--blue:hover {
+  border-color: rgba(70, 200, 255, 0.55);
+  box-shadow: 0 0 32px rgba(70, 200, 255, 0.18), 0 8px 40px rgba(0, 3, 12, 0.4);
+}
+.team-card--purple:hover {
+  border-color: rgba(130, 80, 255, 0.55);
+  box-shadow: 0 0 32px rgba(130, 80, 255, 0.18), 0 8px 40px rgba(0, 3, 12, 0.4);
+}
+.team-card--green:hover {
+  border-color: rgba(72, 199, 142, 0.55);
+  box-shadow: 0 0 32px rgba(72, 199, 142, 0.18), 0 8px 40px rgba(0, 3, 12, 0.4);
+}
+.team-card--yellow:hover {
+  border-color: rgba(255, 196, 46, 0.55);
+  box-shadow: 0 0 32px rgba(255, 196, 46, 0.18), 0 8px 40px rgba(0, 3, 12, 0.4);
+}
+.team-card--red:hover {
+  border-color: rgba(255, 100, 80, 0.55);
+  box-shadow: 0 0 32px rgba(255, 100, 80, 0.18), 0 8px 40px rgba(0, 3, 12, 0.4);
+}
+
+/* ── Avatar (circular initial badge) ────────────────────── */
+.team-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.1rem;
+  flex-shrink: 0;
+}
+
+.team-avatar--blue   { background: rgba(70, 200, 255, 0.1);  border: 1px solid rgba(70, 200, 255, 0.25);  color: var(--sync); }
+.team-avatar--purple { background: rgba(130, 80, 255, 0.1);  border: 1px solid rgba(130, 80, 255, 0.25);  color: #a88aff; }
+.team-avatar--green  { background: rgba(72, 199, 142, 0.1);  border: 1px solid rgba(72, 199, 142, 0.25);  color: #4ecb96; }
+.team-avatar--yellow { background: rgba(255, 196, 46, 0.1);  border: 1px solid rgba(255, 196, 46, 0.25);  color: #ffc82e; }
+.team-avatar--red    { background: rgba(255, 100, 80, 0.1);   border: 1px solid rgba(255, 100, 80, 0.25);   color: #ff7060; }
+
+/* ── Card text ───────────────────────────────────────────── */
+.team-name {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.01em;
+}
+
+/* Role label — coloured per member */
+.team-role {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+
+.team-card--blue   .team-role { color: var(--sync); }
+.team-card--purple .team-role { color: #a88aff; }
+.team-card--green  .team-role { color: #4ecb96; }
+.team-card--yellow .team-role { color: #ffc82e; }
+.team-card--red    .team-role { color: #ff7060; }
+
+.team-desc {
+  font-size: 0.91rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ── Center diamond card ─────────────────────────────────── */
+.team-card--diamond {
+  /* side = center_cell / √2  →  300 / 1.414 ≈ 212px */
+  width:  clamp(156px, 18.4vw, 212px);
+  height: clamp(156px, 18.4vw, 212px);
+  transform: rotate(45deg);
+  border-radius: var(--r-md);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Keep rotation on hover — scale instead of translateY */
+.team-card--red.team-card--diamond:hover {
+  transform: rotate(45deg) scale(1.05);
+}
+
+/* Counter-rotate the inner content so text stays upright */
+.team-card-inner {
+  transform: rotate(-45deg);
+  text-align: center;
+  padding: 1rem 0.85rem;
+  width: 100%;
+}
+
+/* Tighter sizing for the compact diamond interior */
+.team-card-inner .team-avatar {
+  margin-left: auto;
+  margin-right: auto;
+  width: 38px;
+  height: 38px;
+  font-size: 0.82rem;
+  margin-bottom: 0.75rem;
+}
+
+.team-card-inner .team-name {
+  font-size: 1rem;
+}
+
+.team-card-inner .team-role {
+  font-size: 0.62rem;
+  margin-bottom: 0.45rem;
+}
+
+.team-card-inner .team-desc {
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  line-height: 1.45;
+}
+
+/* ── Scroll-reveal stagger ───────────────────────────────── */
+.team-card--tr.reveal    { transition-delay: 0.1s; }
+.team-center-wrap.reveal  { transition-delay: 0.15s; }
+.team-card--bl.reveal    { transition-delay: 0.2s; }
+.team-card--br.reveal    { transition-delay: 0.3s; }
+
+
+/* ============================================================
+   RESPONSIVE — 900 px (team grid)
+   ============================================================ */
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: 1fr clamp(200px, 28vw, 260px) 1fr;
+    grid-template-rows: auto clamp(200px, 28vw, 260px) auto;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE — 760 px (team grid collapses to 2-col)
+   ============================================================ */
+@media (max-width: 760px) {
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+
+  /* Re-place cards into a 2×3 layout — diamond spans full width in the middle */
+  .team-card--tl    { grid-column: 1; grid-row: 1; }
+  .team-card--tr    { grid-column: 2; grid-row: 1; }
+  .team-center-wrap { grid-column: 1 / 3; grid-row: 2; display: block; }
+  .team-card--bl    { grid-column: 1; grid-row: 3; }
+  .team-card--br    { grid-column: 2; grid-row: 3; }
+
+  /* Revert diamond to a normal rectangular card */
+  .team-card--diamond {
+    transform: none;
+    width: 100%;
+    height: auto;
+    border-radius: var(--r-lg);
+    padding: 2rem 1.8rem;
+    display: block;
+  }
+
+  .team-card--red.team-card--diamond:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Revert inner counter-rotation */
+  .team-card-inner {
+    transform: none;
+    text-align: left;
+    padding: 0;
+    width: 100%;
+  }
+
+  .team-card-inner .team-avatar {
+    margin-left: 0;
+    margin-right: 0;
+    width: 44px;
+    height: 44px;
+    font-size: 0.95rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .team-card-inner .team-name { font-size: 1.18rem; }
+  .team-card-inner .team-role { font-size: 0.72rem; margin-bottom: 0.9rem; }
+  .team-card-inner .team-desc { font-size: 0.91rem; color: var(--text-muted); line-height: 1.65; }
+}
+
+
+/* ============================================================
+   RESPONSIVE — 480 px (team grid collapses to 1-col)
+   ============================================================ */
+@media (max-width: 480px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-card--tl,
+  .team-card--tr,
+  .team-center-wrap,
+  .team-card--bl,
+  .team-card--br {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
