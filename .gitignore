@@ -1,0 +1,6 @@
+# Large video files — store these outside git (Google Drive, etc.)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
